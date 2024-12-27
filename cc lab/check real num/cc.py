@@ -4,45 +4,37 @@ def start(s):
         token=get_next()
         if(token==-1):
             return 0
-        r=b(token)
-        return r
+        if(token=='.'):
+            token=get_next()
+            if(token==-1):
+                return 0
+            r=a(token)
+            return r
+        else:
+            return 0
     else:
         return 0
      
 def a(s):
-    if(s=='_'):
-        return 1
-    elif(s.isalpha()):
-        return 1
+    global rep
+    global i
+    if(s.isdigit()):
+        token=get_next()
+        if(token==-1):
+            return 1
+        r=a(token)
+        return r
+    elif(s=='.'):
+        if(rep==0):
+            rep=1
+            i=i-1
+            return 1
+        else:
+            return 0
     else:
         return 0
-         
-def b(s):
-    if(s=='_'):
-        token=get_next()
-        if(token==-1):
-            return 1
-        r=b(token)
-        return r
-        
-    elif(s.isalpha()):
-        token=get_next()
-        if(token==-1):
-            return 1
-        r=b(token)
-        return r
-    elif(s.isdigit()):
-        token=get_next()
-        if(token==-1):
-            return 1
-        r=b(token)
-        return r
-   # elif(" "):
 
-    else:
-        return 0
-     
-    
+            
 def get_next():
     global i
     if(i<length):
@@ -61,7 +53,8 @@ def read_expression_from_file(file_path):
 #        print(f"length{length}")
     return expression
 i=0
-file_path = 'shakeeldeveloper/Compiler-Construction/cc lab/cc /string.txt'
+rep=0
+file_path = 'shakeeldeveloper/Compiler-Construction/cc lab/check real num/string.txt'
 infix_expression = read_expression_from_file(file_path)
 length = len(infix_expression)
 print(length)
@@ -70,7 +63,7 @@ re=start(token)
 print(re)
 
 if(re==1):
-    print("Correct")
+    print("String is Real")
 else:
-    print("InCorrect")
+    print("String is not real")
 
